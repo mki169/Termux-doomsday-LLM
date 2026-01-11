@@ -16,7 +16,7 @@ display_menu() {
 
 # Display the menu
 clear
-display_menu
+display_menu()
 
 # Get user choices
 read -p "Enter your choices: " choices
@@ -30,13 +30,13 @@ for choice in $choices; do
     case $choice in
         1)
             echo "Installing Ollama..."
-            pd install --override-alias ollama ubuntu
+            pd install --override-alias ollama debian
             pd login ollama -- bash -c "apt update && apt upgrade -y && apt install ca-certificates -y && update-ca-certificates -v && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure ca-certificates && curl -fsSL https://ollama.com/install.sh | sh"
             ;;
         2)
             if [ "$ui_setup_done" = false ]; then
                 echo "Setting up UI environment..."
-                pd install --override-alias ui ubuntu
+                pd install --override-alias ui debian
                 ui_setup_done=true
             fi
             echo "Setting up Open WebUI..."
@@ -46,7 +46,7 @@ for choice in $choices; do
         3)
             if [ "$ui_setup_done" = false ]; then
                 echo "Setting up UI environment..."
-                pd install --override-alias ui ubuntu
+                pd install --override-alias ui debian
                 ui_setup_done=true
             fi
             echo "Installing Oobabooga..."
@@ -56,7 +56,7 @@ for choice in $choices; do
         4)
             if [ "$ui_setup_done" = false ]; then
                 echo "Setting up UI environment..."
-                pd install --override-alias ui ubuntu
+                pd install --override-alias ui debian
                 ui_setup_done=true
             fi
             echo "Installing Big-AGI..."
@@ -66,7 +66,7 @@ for choice in $choices; do
 	5)
             if [ "$ui_setup_done" = false ]; then
                 echo "Setting up UI environment..."
-                pd install --override-alias ui ubuntu
+                pd install --override-alias ui debian
                 ui_setup_done=true
             fi
             echo "Installing fastsdcpu..."
@@ -89,14 +89,14 @@ for choice in $choices; do
 	    cd ~
             ;;
         7)
-            pd install --override-alias exo ubuntu
+            pd install --override-alias exo debian
             echo "Installing exo..."
             pd login exo -- bash -c "apt update && apt upgrade -y && apt install libglib2.0-0 libgl1 python3 python3-pip pipenv -y && git clone https://github.com/exo-explore/exo.git && cd exo && pipenv lock && pipenv install . torch flax"
             ;;
 	8)
             if [ "$ui_setup_done" = false ]; then
                 echo "Setting up UI environment..."
-                pd install --override-alias ui ubuntu
+                pd install --override-alias ui debian
                 ui_setup_done=true
             fi
 	    echo "Installing automatic 1111..."
